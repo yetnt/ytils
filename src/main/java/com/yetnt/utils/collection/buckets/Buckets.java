@@ -56,12 +56,15 @@ public abstract class Buckets {
         ArrayList<ArrayList<T>> bucketsList = new ArrayList<>(buckets.length);
         for (Bucket b : buckets) {
             ArrayList<T> bucket = original
-                    .subList(0, original.size())
                     .stream()
                     .filter(b::shouldHold)
                     .collect(Collectors.toCollection(ArrayList::new));
             bucketsList.add(bucket);
         }
         return bucketsList;
+    }
+
+    public static <T> ArrayList<T> scoop(ArrayList<T> original, Bucket ...buckets) {
+        return Buckets.of(original, buckets).stream().flatMap(ArrayList::stream).collect(Collectors.toCollection(ArrayList::new));
     }
 }

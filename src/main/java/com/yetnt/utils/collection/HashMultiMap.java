@@ -2,6 +2,7 @@ package com.yetnt.utils.collection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.function.Predicate;
 
 /**
  * A HashMap who maps 1 key to multiple values.
@@ -46,5 +47,18 @@ public class HashMultiMap<K, T> extends HashMap<K, ArrayList<T>> {
         return values().stream()
                 .filter(value -> value.size() == 1)
                 .toList().size() == values().size();
+    }
+
+    public K findFirstKeyWhere(
+            Predicate<ArrayList<T>> test
+    ) {
+        for (Entry<K, ArrayList<T>> entry : this.entrySet()) {
+            K key = entry.getKey();
+            ArrayList<T> values = entry.getValue();
+            if (test.test(values)) {
+                return key;
+            }
+        }
+        return null;
     }
 }
