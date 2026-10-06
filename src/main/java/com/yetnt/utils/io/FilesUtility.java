@@ -1,5 +1,8 @@
 package com.yetnt.utils.io;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import javax.swing.*;
 import java.io.*;
 import java.nio.charset.Charset;
@@ -28,7 +31,7 @@ public class FilesUtility {
      * @param consumer A Consumer that processes the Scanner object for the file content.
      * @param csn      The character set to use for reading the file. If null, UTF-8 is used.
      */
-    public static void readFromFile(String path, Consumer<Scanner> consumer, Charset csn) throws IOException {
+    public static void readFromFile(String path, @NotNull Consumer<Scanner> consumer, Charset csn) throws IOException {
         csn = csn == null ? StandardCharsets.UTF_8 : csn;
         try (Scanner scanner = new Scanner(new File(path), csn)) {
             consumer.accept(scanner);
@@ -55,7 +58,7 @@ public class FilesUtility {
      * @param consumer A Consumer that writes content to the PrintWriter object.
      * @param csn      The character set to use for writing the file. If null, UTF-8 is used.
      */
-    public static void writeToFile(String path, String name, Consumer<PrintWriter> consumer, Charset csn) throws IOException {
+    public static void writeToFile(String path, String name, @NotNull Consumer<PrintWriter> consumer, Charset csn) throws IOException {
         csn = csn == null ? StandardCharsets.UTF_8 : csn;
         try (FileWriter w = new FileWriter(path + name, csn)) {
             PrintWriter writer = new PrintWriter(w, true);
@@ -70,7 +73,8 @@ public class FilesUtility {
      * @param chooserConfigure A consumer that configures the file chooser.
      * @return The absolute path of the selected file, or null if no file is selected.
      */
-    public static File fileChooser(Consumer<JFileChooser> chooserConfigure, JFrame frameParent) {
+    @Nullable
+    public static File fileChooser(@NotNull Consumer<JFileChooser> chooserConfigure, JFrame frameParent) {
         JFileChooser chooser = new JFileChooser();
         chooserConfigure.accept(chooser);
 
@@ -90,7 +94,7 @@ public class FilesUtility {
         }, frameParent);
     }
 
-    public static void writeBinary(String path, String name, Consumer<DataOutputStream> consumer) throws IOException {
+    public static void writeBinary(String path, String name, @NotNull Consumer<DataOutputStream> consumer) throws IOException {
         try (DataOutputStream out = new DataOutputStream(
                 new BufferedOutputStream(
                         new FileOutputStream(new File(path, name))))) {
@@ -99,7 +103,7 @@ public class FilesUtility {
         }
     }
 
-    public static void readBinary(String path, String name, Consumer<DataInputStream> consumer) throws IOException {
+    public static void readBinary(String path, String name, @NotNull Consumer<DataInputStream> consumer) throws IOException {
         try (DataInputStream in = new DataInputStream(
                 new BufferedInputStream(
                         new FileInputStream(new File(path, name))))) {

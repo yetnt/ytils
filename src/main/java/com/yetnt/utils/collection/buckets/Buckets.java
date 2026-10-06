@@ -1,5 +1,7 @@
 package com.yetnt.utils.collection.buckets;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -26,7 +28,7 @@ public abstract class Buckets {
      *         is a bucket containing elements of a specific type from the original list.
      *         The order of buckets in the returned list corresponds to the order of {@code classes} provided.
      */
-    public static <T> ArrayList<ArrayList<T>> of(ArrayList<T> original, Class<?> ...classes) {
+    public static <T> ArrayList<ArrayList<T>> of(ArrayList<T> original, @NotNull Class<?> ...classes) {
         ArrayList<ArrayList<T>> buckets = new ArrayList<>(classes.length);
         for (Class<?> c : classes) {
             ArrayList<T> bucket = original
@@ -52,7 +54,7 @@ public abstract class Buckets {
      *         is a bucket containing elements that satisfy the condition of the corresponding {@link Bucket}.
      *         The order of buckets in the returned list corresponds to the order of {@code buckets} provided.
      */
-    public static <T> ArrayList<ArrayList<T>> of(ArrayList<T> original, Bucket ...buckets) {
+    public static <T> ArrayList<ArrayList<T>> of(ArrayList<T> original, @NotNull Bucket ...buckets) {
         ArrayList<ArrayList<T>> bucketsList = new ArrayList<>(buckets.length);
         for (Bucket b : buckets) {
             ArrayList<T> bucket = original

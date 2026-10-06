@@ -1,5 +1,7 @@
 package com.yetnt.utils.builders;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import java.awt.Color;
@@ -70,7 +72,7 @@ public class InlineHTML {
      * @param style The InlineHTML instance from which to copy the open and close tags.
      * @return A new InlineHTML instance with the specified content and copied style.
      */
-    public static InlineHTML from(String string, InlineHTML style) {
+    public static InlineHTML from(String string, @NotNull InlineHTML style) {
         return new InlineHTML(string)
                 .setClose(new ArrayList<>(style.getClose()))
                 .setOpen(new ArrayList<>(style.getOpen()));
@@ -126,7 +128,7 @@ public class InlineHTML {
      * @param attributes A {@code LinkedHashMap} where keys are attribute names and values are attribute values.
      * @return The current InlineHTML instance for method chaining.
      */
-    public InlineHTML addAttributes(LinkedHashMap<String, String> attributes) {
+    public InlineHTML addAttributes(@NotNull LinkedHashMap<String, String> attributes) {
         StringBuilder sb = new StringBuilder();
         attributes.forEach((k, v) -> sb.append(" ").append(k).append
                 ("=\"").append(v).append("\""));
@@ -237,7 +239,7 @@ public class InlineHTML {
         );
     }
 
-    public static String colToStr(Color col) {
+    public static String colToStr(@NotNull Color col) {
         return String.format("#%02x%02x%02x", col.getRed(), col.getGreen(), col.getBlue());
     }
 
@@ -308,7 +310,7 @@ public class InlineHTML {
      * @param attributes A LinkedHashMap of attribute names and their values (e.g., "color" -> "#FF0000").
      * @return The current InlineHTML instance for method chaining.
      */
-    public InlineHTML wrapTag(String tag, LinkedHashMap<String, String> attributes) {
+    public InlineHTML wrapTag(String tag, @NotNull LinkedHashMap<String, String> attributes) {
         StringBuilder sb = new StringBuilder();
         sb.append("<").append(tag);
         attributes.forEach((k, v) -> sb.append(" ").append(k).append
@@ -328,7 +330,7 @@ public class InlineHTML {
      * @param style A LinkedHashMap of CSS style properties and their values (e.g., "color" -> "red", "font-size" -> "12px").
      * @return The current InlineHTML instance for method chaining.
      */
-    public InlineHTML wrapTag(String tag, LinkedHashMap<String, String> attributes, LinkedHashMap<String, String> style) {
+    public InlineHTML wrapTag(String tag, @NotNull LinkedHashMap<String, String> attributes, @NotNull LinkedHashMap<String, String> style) {
         StringBuilder sb = new StringBuilder();
         StringBuilder styleBuilder = new StringBuilder();
         sb.append("<").append(tag);
@@ -469,7 +471,7 @@ public class InlineHTML {
         return content;
     }
 
-    public InlineHTML add(InlineHTML jLabelRichText) {
+    public InlineHTML add(@NotNull InlineHTML jLabelRichText) {
         this.content += jLabelRichText.toString();
         return this;
     }

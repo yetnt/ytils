@@ -1,4 +1,4 @@
-package com.yetnt.utils.functional;
+package com.yetnt.utils.functional.function;
 
 
 /**

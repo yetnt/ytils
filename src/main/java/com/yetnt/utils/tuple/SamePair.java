@@ -1,5 +1,8 @@
 package com.yetnt.utils.tuple;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -32,7 +35,9 @@ public class SamePair<T> extends Pair<T, T> {
      * @return A new same pair
      * @param <T> The type the original pair has in both fields.
      */
-    public static <T> SamePair<T> from(Pair<T, T> samePair) {
+    @NotNull
+    @Contract("_ -> new")
+    public static <T> SamePair<T> from(@NotNull Pair<T, T> samePair) {
         return new SamePair<>(samePair.getFirst(), samePair.getSecond());
     }
 
@@ -44,7 +49,7 @@ public class SamePair<T> extends Pair<T, T> {
      * @param function The function to apply to each element.
      * @return A new {@link SamePair} containing the results of applying the mapper function to each element.
      */
-    public <U> SamePair<U> map(Function<T, U> function) {
+    public <U> SamePair<U> map(@NotNull Function<T, U> function) {
         return new SamePair<U>(function.apply(first), function.apply(second));
     }
 
@@ -54,7 +59,7 @@ public class SamePair<T> extends Pair<T, T> {
      * @return A single value
      * @param <U> The type of the single value to return
      */
-    public <U> U mapTo(BiFunction<T, T, U> function) {
+    public <U> U mapTo(@NotNull BiFunction<T, T, U> function) {
         return function.apply(first, second);
     }
 }

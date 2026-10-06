@@ -1,5 +1,8 @@
 package com.yetnt.utils.builders;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.ArrayDeque;
 import java.util.Arrays;
@@ -125,13 +128,7 @@ public final class MarkDownLiteral {
         return this;
     }
 
-    /**
-     * Wraps the input list of strings in a Markdown code block with the specified language.
-     *
-     * @param input The list of strings to be wrapped.
-     * @param languageIdentifier The language identifier for the code block.
-     * @return An ArrayList of strings representing the formatted code block.
-     */
+
     public static ArrayList<String> asCodeBlock(ArrayList<String> input, String languageIdentifier) {
         ArrayList<String> out = new ArrayList<>();
         out.add("```" + languageIdentifier);
@@ -147,7 +144,7 @@ public final class MarkDownLiteral {
      * @param rows The list of rows, where each row is a list of strings.
      * @return An ArrayList of strings representing the formatted Markdown table.
      */
-    public static ArrayList<String> asTable(ArrayList<String> headers, ArrayList<ArrayList<String>> rows) {
+    public static ArrayList<String> asTable(ArrayList<String> headers, @NotNull ArrayList<ArrayList<String>> rows) {
         ArrayList<String> out = new ArrayList<>();
         // Create header row
         String headerRow = "| " + String.join(" | ", headers) + " |";
@@ -170,7 +167,7 @@ public final class MarkDownLiteral {
      * @param str The content of the blockquote.
      * @return An ArrayList of strings representing the formatted GitHub blockquote.
      */
-    public static ArrayList<String> GithubBlockQuote(GithubBlockQuote top, String str) {
+    public static ArrayList<String> GithubBlockQuote(@NotNull GithubBlockQuote top, String str) {
         ArrayList<String> out = new ArrayList<>();
         out.add("> [!"+top.toString()+"]");
         out.add("> " + str);
@@ -183,7 +180,7 @@ public final class MarkDownLiteral {
      * @param str The ArrayList of strings to convert.
      * @return An ArrayList of strings, where each string is prefixed with "- ".
      */
-    public static ArrayList<String> asList(ArrayList<String> str) {
+    public static ArrayList<String> asList(@NotNull ArrayList<String> str) {
         ArrayList<String> out = new ArrayList<>(str.size());
         for (String s : str) {
             out.add("- " + s);
@@ -197,7 +194,7 @@ public final class MarkDownLiteral {
      * @param str The ArrayList of strings to convert.
      * @return An ArrayList of strings, where each string is prefixed with "> ".
      */
-    public static ArrayList<String> asBlockQuote(ArrayList<String> str) {
+    public static ArrayList<String> asBlockQuote(@NotNull ArrayList<String> str) {
         ArrayList<String> out = new ArrayList<>(str.size());
         for (String s : str) {
             out.add("> " + s);
@@ -283,14 +280,15 @@ public final class MarkDownLiteral {
          * Returns the {@link Title} enum corresponding to a given heading number.
          *
          * @param n The heading number (1-6).
-         * @return The {@link Title} enum. Defaults to NOTE if the number is out of range.
+         * @return The {@link Title} enum. Defaults to null if the number is out of range.
          */
+        @Nullable
         public static Title fromNumber(int n) {
             assert n <= 6 && n >= 1;
             return Arrays.stream(Title.values())
                     .filter(t -> t.getNumber() == n)
                     .findFirst()
-                    .orElse(NOTE); // Default or throw exception
+                    .orElse(null); // Default
         }
 
         /**
@@ -298,6 +296,7 @@ public final class MarkDownLiteral {
          *
          * @return The Markdown string for the heading.
          */
+        @NotNull
         public String toMd() {
             return "#".repeat(this.getNumber()) + " ";
         }

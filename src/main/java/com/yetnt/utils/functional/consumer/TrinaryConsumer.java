@@ -1,4 +1,4 @@
-package com.yetnt.utils.functional;
+package com.yetnt.utils.functional.consumer;
 
 /**
  * Represents an operation that accepts three input arguments of the same type and returns no result.

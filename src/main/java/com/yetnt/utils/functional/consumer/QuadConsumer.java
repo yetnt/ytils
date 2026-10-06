@@ -1,4 +1,4 @@
-package com.yetnt.utils.functional;
+package com.yetnt.utils.functional.consumer;
 
 import java.util.function.Consumer;
 import java.util.Objects;

@@ -1,5 +1,7 @@
 package com.yetnt.utils.builders;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -35,7 +37,7 @@ public final class AnsiColour {
      * @return The styled string with ANSI escape codes, followed by a reset code to ensure
      * subsequent console output is not affected.
      */
-    public static String print(String input, Style... styles) {
+    public static String print(String input, @NotNull Style... styles) {
         if (styles.length == 0) return input;
         String prefix = Arrays.stream(styles)
                 .map(Style::getCode)

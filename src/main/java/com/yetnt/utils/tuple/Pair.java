@@ -1,5 +1,7 @@
 package com.yetnt.utils.tuple;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 /**
@@ -53,7 +55,7 @@ public class Pair<T, U> {
      * Creates an immutable {@link Pair} from a {@link MutablePair} instance by fetching it's values.
      * @param pair The mutable pair
      */
-    public Pair(MutablePair<T, U> pair) {
+    public Pair(@NotNull MutablePair<T, U> pair) {
         this.first = pair.getFirst();
         this.second = pair.getSecond();
     }

@@ -1,5 +1,7 @@
 package com.yetnt.utils.collection;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Deque;
@@ -61,7 +63,7 @@ public class SetDeque<T> extends ArrayDeque<T> {
      * @return {@code true} if this deque changed as a result of the call
      */
     @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(@NotNull Collection<? extends T> c) {
         boolean dequeChanged = false;
         for (T t : c) {
             // Use the overridden add() method to ensure uniqueness

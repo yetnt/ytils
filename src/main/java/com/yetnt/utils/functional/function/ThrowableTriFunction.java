@@ -1,9 +1,8 @@
-package com.yetnt.utils.functional;
-
-import java.util.Objects;
+package com.yetnt.utils.functional.function;
 
 /**
- * Functional interface representing an operation that accepts three arguments and returns a result.
+ * Functional interface representing an operation that accepts three arguments and returns a valur
+ * but can also throw.
  * <p>
  *     From <a href="https://github.com/yetnt/j3engine">J3Engine</a>
  * </p>
@@ -12,17 +11,18 @@ import java.util.Objects;
  * @param <U> the type of the second argument to the operation
  * @param <V> the type of the third argument to the operation
  * @param <W> The type to return
- *
+ * @param <X> The exception this function could throw
  * @author Lehlogonolo Poole
  */
 @FunctionalInterface
-public interface TriFunction<T, U, V, W> {
+public interface ThrowableTriFunction<T, U, V, W, X extends Throwable> {
     /**
-     * Applies the function with the 3 arguments
+     * Applies the function
      * @param t The first argument
      * @param u The second argument
      * @param v The third argument
-     * @return The type W
+     * @return Type W
+     * @throws X Whatever exception this may throw
      */
-    W apply (T t, U u, V v);
+    W apply (T t, U u, V v) throws X;
 }

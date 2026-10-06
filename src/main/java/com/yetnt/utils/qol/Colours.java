@@ -1,5 +1,8 @@
 package com.yetnt.utils.qol;
 
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.Color;
 
 /**
@@ -18,6 +21,8 @@ public abstract class Colours {
      * @param alpha The alpha value between 0 and 255
      * @return A new colour with the new alpha applied.
      */
+    @NotNull
+    @Contract("_, _ -> new")
     public static Color alphaChannel(Color original, int alpha) {
         return new Color(original.getRed(), original.getGreen(), original.getBlue(), alpha);
     }

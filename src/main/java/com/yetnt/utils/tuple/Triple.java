@@ -1,7 +1,8 @@
 package com.yetnt.utils.tuple;
 
-
-import com.yetnt.utils.functional.TriFunction;
+import com.yetnt.utils.functional.function.TriFunction;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,9 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param <T> The type held by the list
      * @throws IllegalArgumentException If the list is empty or the list has less than 3 elements.
      */
-    public static <T> Triple<T> from(List<T> list) throws IllegalArgumentException {
+    @NotNull
+    @Contract("_ -> new")
+    public static <T> Triple<T> from(@NotNull List<T> list) throws IllegalArgumentException {
         if (list.isEmpty()) throw new IllegalArgumentException("List input must not be empty");
         if (list.size() < 3) throw new IllegalArgumentException("List input must have at least 3 elements");
         return new Triple<>(list.get(0), list.get(1), list.get(2));
@@ -43,7 +46,7 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @return A single value
      * @param <K> The type of the single value to return
      */
-    public <K> K mapTo(TriFunction<T, T, T, K> map)  {
+    public <K> K mapTo(@NotNull TriFunction<T, T, T, K> map)  {
         return map.apply(v1, v2, v3);
     }
 
@@ -53,6 +56,8 @@ public record Triple<T>(T v1, T v2, T v3) {
      *
      * @return An {@link ArrayList} containing the elements of this Triple.
      */
+    @NotNull
+    @Contract(" -> new")
     public ArrayList<T> toArrayList() {
         return new ArrayList<>(List.of(v1, v2, v3));
     }
@@ -65,7 +70,9 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param mapper The function to apply to each element.
      * @return A new {@link Triple} containing the results of applying the mapper function to each element.
      */
-    public <T2> Triple<T2> map(Function<T, T2> mapper) {
+    @NotNull
+    @Contract("_ -> new")
+    public <T2> Triple<T2> map(@NotNull Function<T, T2> mapper) {
         return new Triple<>(
                 mapper.apply(v1),
                 mapper.apply(v2),
@@ -84,6 +91,8 @@ public record Triple<T>(T v1, T v2, T v3) {
      * </p>
      * @return A stream of the input stuff
      */
+    @NotNull
+    @Contract(pure = true)
     public Stream<T> stream() {
         return Stream.of(v1, v2, v3);
     }
@@ -103,7 +112,7 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param <T> The type the first triple holds
      * @param <V> The type the second triple holds
      */
-    public static <T, V> void forEachPair(Triple<T> t1, Triple<V> t2, BiConsumer<T, V> forEachConsumer) {
+    public static <T, V> void forEachPair(@NotNull Triple<T> t1, @NotNull Triple<V> t2, @NotNull BiConsumer<T, V> forEachConsumer) {
         forEachConsumer.accept(t1.v1, t2.v1);
         forEachConsumer.accept(t1.v2, t2.v2);
         forEachConsumer.accept(t1.v3, t2.v3);
@@ -132,7 +141,9 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param <U> The type held by the second triple
      * @param <V> The type held by the new returned triple
      */
-    public static <T, U, V> Triple<V> mapPair(Triple<T> t1, Triple<U> t2, BiFunction<T, U, V> mapper) {
+    @NotNull
+    @Contract("_, _, _ -> new")
+    public static <T, U, V> Triple<V> mapPair(@NotNull Triple<T> t1, @NotNull Triple<U> t2, @NotNull BiFunction<T, U, V> mapper) {
         return new Triple<>(
                 mapper.apply(t1.v1, t2.v1),
                 mapper.apply(t1.v2, t2.v2),

@@ -1,5 +1,7 @@
 package com.yetnt.utils.io;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.function.Consumer;
@@ -13,6 +15,7 @@ import java.util.function.Function;
  * </p>
  * @implNote The stream is wrapped ina  try-with-resources so you need not close it.
  * @param path The path in the resources folder to this file.
+ * @author Lehlogonolo Poole
  */
 public record JarPath(String path) {
     /**
@@ -23,7 +26,7 @@ public record JarPath(String path) {
      * @param <T> The type of the result returned by the reader func
      * @throws IOException if any Io shit happens
      */
-    public <T> T readAs(Class<?> relative, Function<InputStream, T> func) throws IOException {
+    public <T> T readAs(Class<?> relative, @NotNull Function<InputStream, T> func) throws IOException {
         try (InputStream s = relative.getResourceAsStream(path)) {
             return func.apply(s);
         }
@@ -34,7 +37,7 @@ public record JarPath(String path) {
      * @param func The function to read the file.
      * @throws IOException if any Io shit happens
      */
-    public void read(Class<?> relative, Consumer<InputStream> func) throws IOException {
+    public void read(@NotNull Class<?> relative, @NotNull Consumer<InputStream> func) throws IOException {
         try (InputStream s = relative.getResourceAsStream(path)) {
             func.accept(s);
         }
