@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-public class FilesUtility {
+public final class FilesUtility {
 
     /**
      * Reads the content of a file and processes it using the provided consumer.

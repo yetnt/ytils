@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  * @see Bucket
  * @author Lehlogonolo Poole
  */
-public abstract class Buckets {
+public final class Buckets {
     /**
      * Divides an {@code ArrayList} into multiple buckets based on the provided classes.
      * Each bucket will contain elements from the original list that are instances of the corresponding class.

@@ -153,7 +153,7 @@ public class InlineHTML {
     public InlineHTML addStyle(LinkedHashMap<String, String> style) {
         String openStr = open.getLast();
         if (openStr.contains("style"))
-            throw new RuntimeException("No extra style"); // TODO: Wrap in better error and ErrorHandler
+            throw new RuntimeException("No extra style");
         StringBuilder styleBuilder = new StringBuilder();
         style.forEach((k, v) -> styleBuilder.append(k).append
                 (":").append(v).append(";"));

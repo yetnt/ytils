@@ -4,6 +4,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>ytils</name>
+    <description>yetnt's utilities. A collection of random utilities I've needed throughout my Java projects</description>
+    <url>https://github.com/yetnt/ytils</url>
+    <licenses>
+        <license><name>MIT</name><url>https://opensource.org/license/MIT</url></license>
+    </licenses>
+    <developers>
+        <developer><name>yetnt</name><url>https://github.com/yetnt</url></developer>
+    </developers>
+    <scm>
+        <connection>scm:git:git://github.com/yetnt/ytils.git</connection>
+        <developerConnection>scm:git:ssh://github.com/yetnt/ytils.git</developerConnection>
+        <url>https://github.com/yetnt/ytils</url>
+    </scm>
     <groupId>com.yetnt</groupId>
     <artifactId>ytils</artifactId>
     <version>1.1.0</version>
@@ -25,45 +39,70 @@
 
     <build>
         <plugins>
-
-            <!-- Generate sources.jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
+                        <goals><goal>jar</goal></goals>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- Generate javadocs -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-
+                <version>3.11.2</version>
                 <configuration>
                     <show>private</show>
                     <doclint>none</doclint>
                     <failOnError>false</failOnError>
                     <failOnWarning>false</failOnWarning>
                 </configuration>
-
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
+                        <goals><goal>jar</goal></goals>
                     </execution>
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.11.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                    <!-- <autoPublish>true</autoPublish> -->
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.7</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals><goal>sign</goal></goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 
 </project>

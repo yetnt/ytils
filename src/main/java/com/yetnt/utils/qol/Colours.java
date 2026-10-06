@@ -13,7 +13,7 @@ import java.awt.Color;
  * @see Color
  * @author Lehlogonolo Poole
  */
-public abstract class Colours {
+public final class Colours {
     /**
      * Overrides the alpha channel of a colour by setting it to a new one effectively
      * discarding the old value, or setting it if it did not exist prior.

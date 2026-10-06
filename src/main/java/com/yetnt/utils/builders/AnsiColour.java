@@ -95,6 +95,10 @@ public final class AnsiColour {
      * Implementations of this interface provide the specific ANSI escape code for a style.
      */
     public interface Style {
+        /**
+         * Returns the code associated with this style
+         * @return The ANSI code
+         */
         String getCode();
     }
 
@@ -119,7 +123,7 @@ public final class AnsiColour {
     }
 
     /**
-     * Foreground colours
+     * Foreground colours. Usually the text colour
      */
     public enum FORE implements Style {
         RESET("\u001B[0m"),
