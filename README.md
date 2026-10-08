@@ -32,6 +32,8 @@ but the packages look like this:
     - `function`
         - `TriFunction`, `QuadFunction`
         - `ThrowableFunction`, `ThrowableBiFunction`, ... `ThrowableQuadFunction`
+    - `generic`
+        - `ThrowableRunnable`, `ThrowableSupplier` 
   - `io`
     - `FilesUtility` - Files utility, not finished writing this one so id suggest not using.
     - `JarPath` - Wraps a string path into a record, with a single `read` method to read from resources stream
@@ -39,3 +41,18 @@ but the packages look like this:
     - `Colours` - Contains random repetitive colour stuff i do
   - `wtf` (Dont use anything here.)
     - `ThrowableCentiFunction` - A Function which takes 100 arguments, returns a result and might throw.
+
+
+## Adding as a dependency
+
+### Maven pom.xml
+
+```xml
+<dependency>
+    <groupId>io.github.yetnt</groupId>
+    <artifactId>ytils</artifactId>
+    <version>VERSION</version>
+</dependency>
+```
+
+(It's published on Maven Central so the other imports should work)
