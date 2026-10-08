@@ -13,3 +13,7 @@
   - ThrowableBiConsumer, ThrowableConsumer, ThrowableQuadConsumer, ThrowableTriConsumer,
   ThrowableBiFunction, ThrowableFunction, ThrowableQuadFunction
 - Add README and CHANGELOG
+
+# 1.2.0
+
+- Add `ThrowableRunnable`, `ThrowableSupplier`
