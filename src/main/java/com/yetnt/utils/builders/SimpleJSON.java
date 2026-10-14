@@ -43,8 +43,16 @@ public class SimpleJSON {
         objSet(name, null);
     }
 
-    private void objSet(String name, Object value) {
+    public <T> void set(String name, T[] v) {
+        objSet(name, List.of(v));
+    }
+
+    protected void objSet(String name, Object value) {
         map.put(name, value);
+    }
+
+    public LinkedHashMap<String, Object> getMap() {
+        return map;
     }
 
     @NotNull
