@@ -19,6 +19,7 @@ but the packages look like this:
     - `AnsiColour` - Applying console colouring in a single method
     - `InlineHTML` - HTML Builder via method chaining
     - `MarkDownLiteral` - MarkDown Builder via method chaining
+    - `SimpleJSON` - JSON.
   - `collection`
     - `buckets`
       - `Bucket` - Holds multiple `Class<?>` objects
