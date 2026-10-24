@@ -75,6 +75,18 @@ public class SimpleJSON {
     }
 
     /**
+     * Sets this key to map to the given {@link ToJSONList} implementor.
+     * if the key exists, it's overridden
+     * @implNote The reference to this object is stored, meaning it's {@link ToJSONList#toJson()} is called
+     * once {@link #toString()} is called.
+     * @param key The key to set to
+     * @param value The {@link ToJSONList} implementor
+     */
+    public void set(String key, @NotNull ToJSONList<?, ?> value) {
+        objSet(key, value);
+    }
+
+    /**
      * Sets this key to map to the given {@link SimpleJSON}. if the key exists, it's overridden
      * @implNote The reference to this json is stored, meaning it's only fully serialized
      * once {@link #toString()} is called.
@@ -177,6 +189,7 @@ public class SimpleJSON {
             case Map<?, ?> m -> objSet(key, m);
             case ToJSON<?, ?> toj -> set(key, toj);
             case SimpleJSON sj -> set(key, sj);
+            case ToJSONList<?, ?> tjl -> set(key, tjl);
             default -> {
                 if (value.getClass().isArray()) {
                     set(key, (Object[]) value);
@@ -278,6 +291,7 @@ public class SimpleJSON {
             case List<?> arr -> collectionToString(arr);
             case ToJSON<?, ?> conv -> conv.toJson().toString();
             case SimpleJSON json -> json.toString();
+            case ToJSONList<?, ?> jsl -> collectionToString(jsl.toJson());
             case Map<?, ?> m -> mapToStr(m);
             case null -> "null";
             default ->
@@ -298,6 +312,7 @@ public class SimpleJSON {
      * @return A JSON String Array
      * @throws Exception If something throws lol
      */
+    @NotNull
     public final String collectionToString(@NotNull Collection<?> collection) throws Exception {
         if (collection.isEmpty()) return "[]";
         StringBuilder result = new StringBuilder();
@@ -317,7 +332,7 @@ public class SimpleJSON {
      */
     @Contract(pure = true)
     public SimpleJSON copy() {
-        return new SimpleJSON(map.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        return new SimpleJSON(new LinkedHashMap<>(map));
     }
 
     /**

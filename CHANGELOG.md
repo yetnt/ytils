@@ -17,3 +17,17 @@
 # 1.2.0
 
 - Add `ThrowableRunnable`, `ThrowableSupplier`
+
+# 1.3.0
+
+- Add `SimpleJSON`
+
+# 1.3.1
+
+- Fix SimpleJSON
+
+# 1.4.0
+
+- Fix `SimpleJSON#copy`
+- Add `ToJSONList`
+- other shiz

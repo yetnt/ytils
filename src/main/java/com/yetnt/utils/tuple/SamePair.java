@@ -62,4 +62,8 @@ public class SamePair<T> extends Pair<T, T> {
     public <U> U mapTo(@NotNull BiFunction<T, T, U> function) {
         return function.apply(first, second);
     }
+
+    public <R> Triple<R> expand(@NotNull BiFunction<T, T, Triple<R>> function) {
+        return function.apply(first, second);
+    }
 }

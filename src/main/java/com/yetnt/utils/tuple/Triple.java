@@ -61,6 +61,17 @@ public record Triple<T>(T v1, T v2, T v3) {
     public ArrayList<T> toArrayList() {
         return new ArrayList<>(List.of(v1, v2, v3));
     }
+    /**
+     * Converts this Triple into an array containing its three elements.
+     * The order of elements in the list will be v1, v2, v3.
+     *
+     * @return An array containing the elements of this Triple.
+     */
+    @NotNull
+    @Contract(" -> new")
+    public Object[] toArray() {
+        return new Object[]{v1, v2, v3};
+    }
 
     /**
      * Applies a given mapping function to each element of this Triple,
@@ -95,6 +106,11 @@ public record Triple<T>(T v1, T v2, T v3) {
     @Contract(pure = true)
     public Stream<T> stream() {
         return Stream.of(v1, v2, v3);
+    }
+
+    @Contract(pure = true, value = "_ -> new")
+    public <R> R reduce(@NotNull TriFunction<T, T, T, R> reducer) {
+        return reducer.apply(v1, v2, v3);
     }
 
 
