@@ -51,7 +51,21 @@ but the packages look like this:
 ```xml
 <dependency>
     <groupId>io.github.yetnt</groupId>
-    <artifactId>ytils</artifactId>
+    <artifactId>ytils-all</artifactId>
+    <version>VERSION</version>
+</dependency>
+```
+
+You can also install a specifc module other than everything (the top
+level list above are the module names)
+
+e.g.
+
+
+```xml
+<dependency>
+    <groupId>io.github.yetnt</groupId>
+    <artifactId>functional</artifactId>
     <version>VERSION</version>
 </dependency>
 ```

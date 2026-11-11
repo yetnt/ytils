@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
 
     <name>ytils</name>
     <description>yetnt's utilities. A collection of random utilities I've needed throughout my Java projects</description>
@@ -13,6 +14,17 @@
     <developers>
         <developer><name>yetnt</name><url>https://github.com/yetnt</url></developer>
     </developers>
+    <modules>
+        <module>functional</module>
+        <module>builders</module>
+        <module>collection</module>
+        <module>qol</module>
+        <module>tuple</module>
+        <module>io</module>
+        <module>wtf</module>
+        <module>ytils-all</module>
+        <module>cli</module>
+    </modules>
     <scm>
         <connection>scm:git:git://github.com/yetnt/ytils.git</connection>
         <developerConnection>scm:git:ssh://github.com/yetnt/ytils.git</developerConnection>
@@ -20,7 +32,7 @@
     </scm>
     <groupId>io.github.yetnt</groupId>
     <artifactId>ytils</artifactId>
-    <version>1.4.0</version>
+    <version>2.0.0</version>
 
     <properties>
         <maven.compiler.source>25</maven.compiler.source>
@@ -60,6 +72,7 @@
                     <doclint>none</doclint>
                     <failOnError>false</failOnError>
                     <failOnWarning>false</failOnWarning>
+                    <detectOfflineLinks>false</detectOfflineLinks>
                 </configuration>
                 <executions>
                     <execution>
