@@ -1,0 +1,16 @@
+io.github.yetnt.utils.all
+io.github.yetnt.utils.builders
+io.github.yetnt.utils.cli
+io.github.yetnt.utils.cli.dcli
+io.github.yetnt.utils.cli.dcli.args
+io.github.yetnt.utils.cli.dcli.args.tag
+io.github.yetnt.utils.cli.types
+io.github.yetnt.utils.collection
+io.github.yetnt.utils.collection.buckets
+io.github.yetnt.utils.functional.consumer
+io.github.yetnt.utils.functional.function
+io.github.yetnt.utils.functional.generic
+io.github.yetnt.utils.io
+io.github.yetnt.utils.qol
+io.github.yetnt.utils.tuple
+io.github.yetnt.utils.wtf
