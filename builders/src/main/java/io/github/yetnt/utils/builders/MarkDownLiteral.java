@@ -23,6 +23,7 @@ import java.util.Deque;
  * <p>
  *     From <a href="https://github.com/yetnt/jaiva">Jaiva!</a>
  * </p>
+ * @implSpec This is NOT intended to e general purpose Markdown utility!
  *
  * @author Lehlogonolo Poole
  */

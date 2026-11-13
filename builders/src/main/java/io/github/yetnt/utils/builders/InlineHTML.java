@@ -37,9 +37,10 @@ import java.util.*;
  *     From <a href="https://github.com/yetnt/j3engine">J3Engine</a>
  * </p>
  * @author Lehlogonolo Poole
- * @implSpec
+ * @implNote
  * To ensure a properly formed HTML document one must call {@link #wrapHTML()} to close
  * a {@link InlineHTML} in {@code <html></html>} tags.
+ * @implSpec This is NOT intended to e general purpose HTML utility!
  */
 public class InlineHTML {
     private String content;

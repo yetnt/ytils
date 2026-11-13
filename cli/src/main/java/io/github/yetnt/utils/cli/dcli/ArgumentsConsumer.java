@@ -116,8 +116,8 @@ public class ArgumentsConsumer {
     private void filterAndMatch() {
         paths = paths.stream().filter(p -> {
             List<ArgumentType> ls = new ArrayList<>(p.getArguments().subList(0, list.size())).stream().map(ArgInterface::getType).toList();
-            Pair<Boolean, ArrayList<SamePair<ArgumentType>>> pairable = SamePair.pairable(ls, list);
-            return pairable.getFirst();
+            SamePair.ZipResult<ArgumentType> pairable = SamePair.zip(ls, list);
+            return pairable.isSuccessful();
         }).collect(Collectors.toCollection(ArrayList::new));
     }
 }

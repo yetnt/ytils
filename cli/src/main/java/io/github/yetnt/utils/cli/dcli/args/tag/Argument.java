@@ -31,9 +31,21 @@ public class Argument<T> implements ArgInterface {
     }
 
     @NotNull
-    @Contract("_ -> new")
-    public static Argument<?> anon(Class<?> expected) {
-        return new Argument<>(expected, null, null, ArgumentType.ANON);
+    @Contract("_, _ -> new")
+    public static Argument<?> anon(Class<?> expected, String name) {
+        return new Argument<>(expected, ArgName.of(name), null, ArgumentType.ANON);
+    }
+
+    public ArgName getTagName() {
+        return tagName;
+    }
+
+    public Class<T> getExpected() {
+        return expected;
+    }
+
+    public TaggedSeparator getSeparator() {
+        return separator;
     }
 
     @Override

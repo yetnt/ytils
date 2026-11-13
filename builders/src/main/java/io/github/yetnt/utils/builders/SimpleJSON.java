@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Simple JSON utility.
  * Damn you im not documenting this or giving an exmaple
+ * @implSpec This is NOT intended to e general purpose JSON utility!
  */
 public class SimpleJSON {
 

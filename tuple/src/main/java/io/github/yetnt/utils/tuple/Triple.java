@@ -17,13 +17,22 @@ import java.util.stream.Stream;
  *     From <a href="https://github.com/yetnt/j3engine">J3Engine</a>
  * </p>
  *
- * @param v1 The first value
- * @param v2 The second value
- * @param v3 The third value
+ * @param first The first value
+ * @param second The second value
+ * @param third The third value
  * @param <T> The type of the elements in the triple.
  * @author Lehlogonolo Poole
  */
-public record Triple<T>(T v1, T v2, T v3) {
+public record Triple<T>(T first, T second, T third) {
+
+    // for old APIS
+
+    @Deprecated(since = "2.0.0")
+    public T v1() {return first;}
+    @Deprecated(since = "2.0.0")
+    public T v2() {return second;}
+    @Deprecated(since = "2.0.0")
+    public T v3() {return third;}
 
     /**
      * Creates a new {@link Triple} record from a given list
@@ -47,7 +56,7 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param <K> The type of the single value to return
      */
     public <K> K mapTo(@NotNull TriFunction<T, T, T, K> map)  {
-        return map.apply(v1, v2, v3);
+        return map.apply(first, second, third);
     }
 
     /**
@@ -59,7 +68,7 @@ public record Triple<T>(T v1, T v2, T v3) {
     @NotNull
     @Contract(" -> new")
     public ArrayList<T> toArrayList() {
-        return new ArrayList<>(List.of(v1, v2, v3));
+        return new ArrayList<>(List.of(first, second, third));
     }
     /**
      * Converts this Triple into an array containing its three elements.
@@ -70,7 +79,7 @@ public record Triple<T>(T v1, T v2, T v3) {
     @NotNull
     @Contract(" -> new")
     public Object[] toArray() {
-        return new Object[]{v1, v2, v3};
+        return new Object[]{first, second, third};
     }
 
     /**
@@ -85,9 +94,9 @@ public record Triple<T>(T v1, T v2, T v3) {
     @Contract("_ -> new")
     public <T2> Triple<T2> map(@NotNull Function<T, T2> mapper) {
         return new Triple<>(
-                mapper.apply(v1),
-                mapper.apply(v2),
-                mapper.apply(v3)
+                mapper.apply(first),
+                mapper.apply(second),
+                mapper.apply(third)
         );
     }
 
@@ -105,12 +114,12 @@ public record Triple<T>(T v1, T v2, T v3) {
     @NotNull
     @Contract(pure = true)
     public Stream<T> stream() {
-        return Stream.of(v1, v2, v3);
+        return Stream.of(first, second, third);
     }
 
     @Contract(pure = true, value = "_ -> new")
     public <R> R reduce(@NotNull TriFunction<T, T, T, R> reducer) {
-        return reducer.apply(v1, v2, v3);
+        return reducer.apply(first, second, third);
     }
 
 
@@ -120,18 +129,38 @@ public record Triple<T>(T v1, T v2, T v3) {
      *     This is if, you were to take {@code v1} of each Triple, and consume them with a {@link BiConsumer},
      *     applied to each argument in one call.
      * </p>
-     * @implNote This means the {@link BiConsumer} will be called 3 different types for {{@link #v1()}}, {@link #v2()}
-     *          and {@link #v3()} of each triple
+     * @implNote This means the {@link BiConsumer} will be called 3 different types for {{@link #first()}}, {@link #second()}
+     *          and {@link #third()} of each triple
      * @param t1 The first triple
      * @param t2 The second triple
      * @param forEachConsumer The consumer to apply to each positional argument
      * @param <T> The type the first triple holds
      * @param <V> The type the second triple holds
      */
+    public static <T, V> void forEachZip(@NotNull Triple<T> t1, @NotNull Triple<V> t2, @NotNull BiConsumer<T, V> forEachConsumer) {
+        forEachConsumer.accept(t1.first, t2.first);
+        forEachConsumer.accept(t1.second, t2.second);
+        forEachConsumer.accept(t1.third, t2.third);
+    }
+
+    /**
+     * Applies the given consumer to each positional pair of the two input triples.
+     * <p>
+     *     This is if, you were to take {@code v1} of each Triple, and consume them with a {@link BiConsumer},
+     *     applied to each argument in one call.
+     * </p>
+     * @implNote This means the {@link BiConsumer} will be called 3 different types for {{@link #first()}}, {@link #second()}
+     *          and {@link #third()} of each triple
+     * @param t1 The first triple
+     * @param t2 The second triple
+     * @param forEachConsumer The consumer to apply to each positional argument
+     * @param <T> The type the first triple holds
+     * @param <V> The type the second triple holds
+     * @deprecated Use {@link #forEachZip(Triple, Triple, BiConsumer)} instead
+     */
+    @Deprecated(forRemoval = true, since = "2.0.0")
     public static <T, V> void forEachPair(@NotNull Triple<T> t1, @NotNull Triple<V> t2, @NotNull BiConsumer<T, V> forEachConsumer) {
-        forEachConsumer.accept(t1.v1, t2.v1);
-        forEachConsumer.accept(t1.v2, t2.v2);
-        forEachConsumer.accept(t1.v3, t2.v3);
+        forEachZip(t1, t2, forEachConsumer);
     }
 
     /**
@@ -156,14 +185,45 @@ public record Triple<T>(T v1, T v2, T v3) {
      * @param <T> The type held by the first triple
      * @param <U> The type held by the second triple
      * @param <V> The type held by the new returned triple
+     * @deprecated Use {@link #zip(Triple, Triple, BiFunction)} instead
      */
+    @Deprecated(forRemoval = true, since = "2.0.0")
     @NotNull
     @Contract("_, _, _ -> new")
     public static <T, U, V> Triple<V> mapPair(@NotNull Triple<T> t1, @NotNull Triple<U> t2, @NotNull BiFunction<T, U, V> mapper) {
+        return zip(t1, t2, mapper);
+    }
+
+    /**
+     * Zips each positional pair of the two input triples back into the same position of a new triple.
+     * <p>
+     *     This is if you were to take {@code v1} of each Triple, apply the map then save that as {@code v1} of
+     *     a new triple, applied to each argument in one call.
+     * </p>
+     * <pre>{@code
+     * Triple<Integer> a = new Triple<>(1, 2, 3);
+     * Triple<Integer> b = new Triple<>(10, 20, 30);
+     *
+     * Triple<Integer> result =
+     *     TripleUtils.zip(a, b, Integer::sum);
+     *
+     * // (11, 22, 33)
+     * }</pre>
+     * @param triple1 The first triple
+     * @param triple2 The second triple
+     * @param zipper The map to apply to each positional element of the triple
+     * @return A new triple
+     * @param <T> The type held by the first triple
+     * @param <U> The type held by the second triple
+     * @param <V> The type held by the new returned triple
+     */
+    @NotNull
+    @Contract("_, _, _ -> new")
+    public static <T, U, V> Triple<V> zip(@NotNull Triple<T> triple1, @NotNull Triple<U> triple2, @NotNull BiFunction<T, U, V> zipper) {
         return new Triple<>(
-                mapper.apply(t1.v1, t2.v1),
-                mapper.apply(t1.v2, t2.v2),
-                mapper.apply(t1.v3, t2.v3)
+                zipper.apply(triple1.first, triple2.first),
+                zipper.apply(triple1.second, triple2.second),
+                zipper.apply(triple1.third, triple2.third)
         );
     }
 }

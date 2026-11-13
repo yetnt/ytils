@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  *     From <a href="https://github.com/yetnt/jaiva">Jaiva!</a>
  * </p>
  * @author Lehlogonolo Poole
+ * @implSpec This is NOT intended to e general purpose CLI output utility!
  */
 public final class AnsiColour {
 

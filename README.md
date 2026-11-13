@@ -1,4 +1,4 @@
-# com.yetnt.utils (ytils)
+# io.github.yetnt.utils (ytils)
 
 My own custom utilities that I use a lot.
 
@@ -9,7 +9,8 @@ what i want man,
 
 but the packages look like this:
 
-- `com.yetnt.utils`
+- `io.github.yetnt.utils` (Even though all modules are separate, they all share this common base
+  e package)
   - `tuple`
     - `Pair` - Immutable tuple of two related values of different types
     - `SamePair` - Immutable tuple of two related values of the same type
@@ -18,7 +19,7 @@ but the packages look like this:
   - `builders`
     - `AnsiColour` - Applying console colouring in a single method
     - `InlineHTML` - HTML Builder via method chaining
-    - `MarkDownLiteral` - MarkDown Builder via method chaining
+    - `MarkDownLiteral` - Markdown Builder via method chaining
     - `SimpleJSON` - JSON.
   - `collection`
     - `buckets`
@@ -28,11 +29,11 @@ but the packages look like this:
     - `SetDeque` - A deque with uniqueness. Not tested lol
   - `functional` (The interface names are self-descriptive.)
     - `consumer`
-      - `TriConsumer`, `TrinaryConsumer`, `QuadConsumer`
-      - `ThrowableConsumer`, `ThrowableBiConsumer`, ... `ThrowableQuadConsumer`
+      - `TriConsumer`, `TrinaryConsumer`, `QuadConsumer`, `QuinticConsumer`
+      - `ThrowableConsumer`, `ThrowableBiConsumer`, `ThrowableTriConsumer`, `ThrowableQuadConsumer`, `ThrowableQuinticConsumer`
     - `function`
-        - `TriFunction`, `QuadFunction`
-        - `ThrowableFunction`, `ThrowableBiFunction`, ... `ThrowableQuadFunction`
+        - `TriFunction`, `QuadFunction`, `QuinticFunction`
+        - `ThrowableFunction`, `ThrowableBiFunction`, `ThrowableTriFunction`, `ThrowableQuadFunction`, `ThrowableQuinticFunction`
     - `generic`
         - `ThrowableRunnable`, `ThrowableSupplier` 
   - `io`
@@ -40,6 +41,12 @@ but the packages look like this:
     - `JarPath` - Wraps a string path into a record, with a single `read` method to read from resources stream
   - `qol`
     - `Colours` - Contains random repetitive colour stuff i do
+  - `cli` (New CLI helper stuff im making, Not up to speed yet and some of these aren't implemented.)
+    - `DeclarativeCli` - CLI helper where you declare valid argument "paths"
+    - `FunctionalCLI` - CLI helper where you consume typed arguments
+    - `dcli` - Declarative cli stuff
+    - `fcli` - Functional cli stuff
+    - `types` - Common types between the 2
   - `wtf` (Dont use anything here.)
     - `ThrowableCentiFunction` - A Function which takes 100 arguments, returns a result and might throw.
 
@@ -56,7 +63,7 @@ but the packages look like this:
 </dependency>
 ```
 
-You can also install a specifc module other than everything (the top
+You can also install a specific module other than everything (the top
 level list above are the module names)
 
 e.g.

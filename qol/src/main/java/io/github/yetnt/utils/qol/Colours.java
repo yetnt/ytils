@@ -23,7 +23,7 @@ public final class Colours {
      */
     @NotNull
     @Contract("_, _ -> new")
-    public static Color alphaChannel(Color original, int alpha) {
+    public static Color alphaChannel(@NotNull Color original, int alpha) {
         return new Color(original.getRed(), original.getGreen(), original.getBlue(), alpha);
     }
 }
