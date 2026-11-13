@@ -75,7 +75,7 @@ not even require using ytils-all, An example would be importing the
 - Started adding `cli` but nothing in there works at the moment but theres so many improvements
   that i need v2 now lol for J3Engine and Jaiva
 
-[//]: # (- Added `Quintic` and `Sextic` functional interfaces [Uncomment when added.] )
+- Added `Quintic` functional interfaces [Uncomment when added.] 
 - Fix `SimpleJSON#copy`
 - Add `ToJSONList`
 - other shiz
